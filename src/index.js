@@ -1,10 +1,16 @@
 require('dotenv').config();
-const express = require('express');
+const express = require('express');     // <-- pakai ini saja
 const database = require('./config/database');
 const whatsappService = require('./services/baileysService');
 const notificationRoutes = require('./routes/notificationRoutes');
 const logger = require('./utils/logger');
 const schedulerService = require('./services/schedulerService');
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log('HTTP server on', PORT);
+});
 
 class Application {
   constructor() {
