@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: wa-notifier-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - wa-network
+
+  app:
+    build: .
+    container_name: wa-notifier-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: Asia/Jakarta
+      MONGODB_URI: mongodb+srv://bimsky:bima0109@cluster0.jjpj0uc.mongodb.net/?appName=Cluster0
+      MONGO_DB_NAME: wa_sessions
+      SESSION_COLLECTION: wwebjs
+      LOG_LEVEL: info
+      PORT: 3000
+      # Isi environment variables lainnya dari .env
+      GROUP_NAME: ${GROUP_NAME}
+      CRON_EXPRESSION: ${CRON_EXPRESSION}
+      MENTION_MODE: ${MENTION_MODE}
+      MESSAGE_TEXT: ${MESSAGE_TEXT}
+      OWNER_NUMBER: ${OWNER_NUMBER}
+      ALLOW_ONLY_TARGET_GROUP: ${ALLOW_ONLY_TARGET_GROUP}
+    depends_on:
+      - mongodb
+    volumes:
+      - ./src:/app/src
+    networks:
+      - wa-network
+
+volumes:
+  mongo_data:
+
+networks:
+  wa-network:
+    driver: bridge

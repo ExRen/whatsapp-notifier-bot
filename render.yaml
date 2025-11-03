@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: whatsapp-notifier-bot
+    env: node
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: MONGODB_URI
+        sync: false
+      - key: OWNER_NUMBER
+        sync: false
+      - key: SCHEDULER_ENABLED
+        value: true
+      - key: TARGET_GROUP_JID
+        sync: false
+      - key: NOTIFICATION_MESSAGE
+        sync: false
+      - key: CRON_SCHEDULE
+        value: 0 20 * * 0
+    disk:
+      name: whatsapp-auth
+      mountPath: /opt/render/project/src/.wwebjs_auth
+      sizeGB: 1

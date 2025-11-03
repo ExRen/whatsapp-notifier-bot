@@ -1,0 +1,31 @@
+{
+  "name": "whatsapp-notifier-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp Notifier Bot with MongoDB",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "notifier"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "pino": "^10.1.0",
+    "puppeteer": "^21.5.0",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.23.0",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
